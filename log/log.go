@@ -96,22 +96,22 @@ func Trace(msg string, tag ...string) {
 
 func Panic(err error, msg string, tag ...string) {
 	if len(tag) == 4 {
-		Logger.Panic().Str(tag[0], tag[1]).Str(tag[2],tag[3]).Msg(msg)
+		Logger.Panic().Err(err).Str(tag[0], tag[1]).Str(tag[2],tag[3]).Msg(msg)
 		return
 	}
 	if len(tag) == 3 {
-		Logger.Panic().Str(tag[0], tag[1]).Str("SRC",tag[2]).Msg(msg)
+		Logger.Panic().Err(err).Str(tag[0], tag[1]).Str("SRC",tag[2]).Msg(msg)
 		return
 	}
 	if len(tag) == 2 {
-		Logger.Panic().Str(tag[0], tag[1]).Msg(msg)
+		Logger.Panic().Err(err).Str(tag[0], tag[1]).Msg(msg)
 		return
 	}
 	if len(tag) == 1 {
-		Logger.Panic().Str("SRC", tag[0]).Msg(msg)
+		Logger.Panic().Err(err).Str("SRC", tag[0]).Msg(msg)
 		return
 	}
-	Logger.Panic().Msg(msg)
+	Logger.Panic().Err(err).Msg(msg)
 }
 
 func Fatal(err error, msg string, tag ...string) {
@@ -131,7 +131,7 @@ func Fatal(err error, msg string, tag ...string) {
 		Logger.Fatal().Err(err).Str("SRC", tag[0]).Msg(msg)
 		return
 	}
-	Logger.Fatal().Msg(msg)
+	Logger.Fatal().Err(err).Msg(msg)
 }
 
 func Error(err error, msg string, tag ...string) {
@@ -151,5 +151,5 @@ func Error(err error, msg string, tag ...string) {
 		Logger.Error().Err(err).Str("SRC", tag[0]).Msg(msg)
 		return
 	}
-	Logger.Error().Msg(msg)
+	Logger.Error().Err(err).Msg(msg)
 }
